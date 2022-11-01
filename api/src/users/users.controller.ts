@@ -42,4 +42,10 @@ export class UsersController {
     // async getFile(@Param("filename") filename: string, @Res() res: any) {
     //     res.sendFile(filename, { root: './upload' });
     // }
+
+    @Post('/login')
+    async login(@Body() body: any): Promise<any>{
+        return await this.service.login(body);
+    }
+
 }

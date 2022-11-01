@@ -29,6 +29,9 @@ let UsersController = class UsersController {
         let url = "http://localhost:4000/users/" + file.path;
         return this.service.updateAvatar(id, url);
     }
+    async login(body) {
+        return await this.service.login(body);
+    }
 };
 __decorate([
     (0, common_1.Inject)(users_service_1.UsersService),
@@ -58,6 +61,13 @@ __decorate([
     __metadata("design:paramtypes", [Number, Object, Object]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "uploadFile", null);
+__decorate([
+    (0, common_1.Post)('/login'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "login", null);
 UsersController = __decorate([
     (0, common_1.Controller)('users'),
     __metadata("design:paramtypes", [users_service_1.UsersService])

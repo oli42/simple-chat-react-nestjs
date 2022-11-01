@@ -37,6 +37,13 @@ let UsersService = class UsersService {
         await this.userRepository.save(user);
         return user;
     }
+    async login(body) {
+        const user = await this.userRepository.findOne({ where: { email: body.email } });
+        const match = bcrypt.compareSync(body.password, user.password);
+        if (!match)
+            return { error: "Mot de passe invalide" };
+        return true;
+    }
 };
 UsersService = __decorate([
     (0, common_1.Injectable)(),

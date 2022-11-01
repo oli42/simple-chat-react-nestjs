@@ -5,4 +5,5 @@ export declare class UsersService {
     constructor(userRepository: Repository<User>);
     createUser(body: any): Promise<User>;
     updateAvatar(id: number, image: string): Promise<any>;
+    login(body: any): Promise<any>;
 }

@@ -3,22 +3,20 @@ import Add from "../img/addAvatar.png";
 import { Link } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 
+
+
+
 const Register = () => {
     const [err, setErr] = useState(false);
     // const navigate = useNavigate();
     const [selectedFile, setSelectedFile] = useState(null);
    
-  
-   async function handleSubmit(e) {
+    
+
+
+  async function handleSubmit(e) {
         // setLoading(true);
         e.preventDefault();
-        
-        // if (selectedFile.size > 84){
-        //   setSelectedFile(null);
-        //   setErr(true);
-        //   return;
-        // }
-
         let url = "http://localhost:4000/users/createUser";
         const response = await fetch(url, {method: "POST",
         headers: {
@@ -29,18 +27,19 @@ const Register = () => {
           username: e.target[0].value,
           email: e.target[1].value,
           password: e.target[2].value,
-      })
-    }
+        })
+      }
     )
     const result = await response.json();
 
-    console.log('reponse db' , result);
-    console.log('selectedFile', selectedFile);
+    console.log('reponse createUser' , result);
     if (response.err){
       setErr(true);
     }
-
-
+    
+    
+    console.log('selectedFile', selectedFile);
+    
     const formData = new FormData();
     formData.append("file", selectedFile, selectedFile.name);
     let res = await fetch(
@@ -53,8 +52,8 @@ const Register = () => {
 		).then(res => res.json())
     console.log('res', res);
     
-  };
-  
+ 
+    }
     return (
       <div className="formContainer">
         <div className="imgContainer">
@@ -71,10 +70,11 @@ const Register = () => {
                 <span>Add an avatar</span>
                 </label>
                 <button>Sign up</button>
-                {err && <span>File size cannot exceed more than 1MB</span>}
+                {/* {err && <span>File size cannot exceed more than 1MB</span>} */}
+                {err}
             </form>
             <p>
-                {/* Already registered ? <Link to="/register">Login</Link> */}
+                Already registered ? <Link to="/Login">Login</Link>
             </p>
             </div>
         </div>
