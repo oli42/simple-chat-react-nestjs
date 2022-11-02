@@ -19,9 +19,9 @@ const Search = () => {
             {user && (
                 <div className="userChat" >
                 {/* <div className="userChat" onClick={handleSelect}> */}
-                <img src={user.photoURL} alt="" />
+                {/* <img src={user.avatar} alt="" /> */}
                 <div className="userChatInfo">
-                    {/* <span>{user.displayName}</span> */}
+                    {/* <span>{user.username}</span> */}
                 </div>
                 </div>
             )}

@@ -2,20 +2,23 @@ import React, { useState } from "react";
 import Add from "../img/addAvatar.png";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { addUser } from "../feature/userSlice";
 
 
 
 
 const Register = () => {
-    const [err, setErr] = useState(false);
-    const navigate = useNavigate();
-    const [selectedFile, setSelectedFile] = useState(null);
-   
+  const [err, setErr] = useState(false);
+  const navigate = useNavigate();
+  const [selectedFile, setSelectedFile] = useState<File>(Add);
+
+  const user = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
+
+  const handleSelect = async (e: any) => setSelectedFile(e.target.files[0])
     
-
-
-  async function handleSubmit(e) {
-        // setLoading(true);
+  async function handleSubmit(e: any) {
         e.preventDefault();
         let url = "http://localhost:4000/users/createUser";
         const response = await fetch(url, {method: "POST",
@@ -31,9 +34,11 @@ const Register = () => {
       }
     )
     const result = await response.json();
+    dispatch({type: addUser,payload: result});
+
 
     console.log('reponse createUser' , result);
-    if (response.err){
+    if (err){
       setErr(true);
     }
     
@@ -52,7 +57,8 @@ const Register = () => {
 		).then(res => res.json())
     console.log('res', res);
     navigate("/");
- 
+    dispatch({type: addUser,payload: res});
+
     }
     return (
       <div className="formContainer">
@@ -64,7 +70,7 @@ const Register = () => {
                 <input required type="text" placeholder="name" />
                 <input required type="email" placeholder="email" />
                 <input required type="password" placeholder="password" />
-                <input required style={{ display: "none" }} type="file" id="file" onChange={(e) => setSelectedFile(e.target.files[0])}/>
+                <input required style={{ display: "none" }} type="file" id="file" onChange={handleSelect}/>
                 <label htmlFor="file">
                 <img src={Add} alt="" />
                 <span>Add an avatar</span>

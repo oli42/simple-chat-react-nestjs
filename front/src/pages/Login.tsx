@@ -8,7 +8,7 @@ const Login = () => {
   const [err, setErr] = useState(false);
   const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: any) => {
       e.preventDefault();
       let url = "http://localhost:4000/users/login";
       const response = await fetch(url, {method: "POST",
@@ -24,7 +24,7 @@ const Login = () => {
   const result = await response.json();
 
   console.log('reponse login' , result);
-  if (response.err){
+  if (err){
     setErr(true);
   }
   navigate("/");
