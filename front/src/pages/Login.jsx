@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-// import { useNavigate, Link } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 // import { signInWithEmailAndPassword } from "firebase/auth";
 // import { auth } from "../firebase";
 
 const Login = () => {
   const [err, setErr] = useState(false);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -27,6 +27,7 @@ const Login = () => {
   if (response.err){
     setErr(true);
   }
+  navigate("/");
   
   }
   return (

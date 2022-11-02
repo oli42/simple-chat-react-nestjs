@@ -1,9 +1,10 @@
+$gif: url(https://i.pinimg.com/originals/3d/08/e0/3d08e03cb40252526fee2036a67f07f1.gif);
+
 .formContainer {
 
-  // background-color: #f7cf60;
-    // background-image: url(https://media.giphy.com/media/U3qYN8S0j3bpK/giphy.gif);
-    background-image: url(https://i.pinimg.com/originals/3d/08/e0/3d08e03cb40252526fee2036a67f07f1.gif);
-    height: 100vh;
+  
+  background-image: $gif;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -79,7 +80,7 @@
 }
 
 .home {
-  background-color: #a7bcff;
+  background-image: $gif;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -97,7 +98,7 @@
     // }
 
     .sidebar {
-      flex: 1;
+      flex: 0.5;
       background-color: #3e3c61;
       position: relative;
 
@@ -165,7 +166,7 @@
         padding: 10px;
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 15px;
         color: white;
         cursor: pointer;
 
@@ -180,20 +181,24 @@
           object-fit: cover;
         }
 
-        .userChatInfo {
+        // .userChatInfo {
           span {
             font-size: 18px;
             font-weight: 500;
+            // display: inline-block;
+            // vertical-align: middle
           }
           p {
             font-size: 14px;
             color: lightgray;
+            display: inline-block;
+            vertical-align: middle
           }
-        }
+        // }
       }
     }
     .chat {
-      flex: 2;
+      flex: 3;
 
       .chatInfo {
         height: 50px;

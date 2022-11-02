@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import Add from "../img/addAvatar.png";
 import { Link } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 
 
 const Register = () => {
     const [err, setErr] = useState(false);
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const [selectedFile, setSelectedFile] = useState(null);
    
     
@@ -51,7 +51,7 @@ const Register = () => {
 			}
 		).then(res => res.json())
     console.log('res', res);
-    
+    navigate("/");
  
     }
     return (

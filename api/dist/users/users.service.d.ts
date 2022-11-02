@@ -6,4 +6,5 @@ export declare class UsersService {
     createUser(body: any): Promise<User>;
     updateAvatar(id: number, image: string): Promise<any>;
     login(body: any): Promise<any>;
+    getUsers(): Promise<any>;
 }

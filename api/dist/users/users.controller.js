@@ -15,9 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersController = void 0;
 const common_1 = require("@nestjs/common");
 const platform_express_1 = require("@nestjs/platform-express");
-const multer_1 = require("multer");
-const path_1 = require("path");
 const users_service_1 = require("./users.service");
+const users_utils_1 = require("./users.utils");
 let UsersController = class UsersController {
     constructor(usersService) {
         this.usersService = usersService;
@@ -29,8 +28,14 @@ let UsersController = class UsersController {
         let url = "http://localhost:4000/users/" + file.path;
         return this.service.updateAvatar(id, url);
     }
+    async getFile(filename, res) {
+        res.sendFile(filename, { root: './upload' });
+    }
     async login(body) {
         return await this.service.login(body);
+    }
+    async getUsers() {
+        return await this.service.getUsers();
     }
 };
 __decorate([
@@ -46,14 +51,7 @@ __decorate([
 ], UsersController.prototype, "createUser", null);
 __decorate([
     (0, common_1.Post)("/:id/upload"),
-    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)("file", {
-        storage: (0, multer_1.diskStorage)({
-            destination: "./upload", filename: (req, file, callback) => {
-                let fileName = (Math.random() + 1).toString(36).substring(7);
-                callback(null, fileName + (0, path_1.extname)(file.originalname));
-            }
-        })
-    })),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)("file", users_utils_1.saveImageToStorage)),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __param(1, (0, common_1.UploadedFile)()),
     __param(2, (0, common_1.Body)()),
@@ -62,12 +60,26 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "uploadFile", null);
 __decorate([
+    (0, common_1.Get)("upload/:filename"),
+    __param(0, (0, common_1.Param)("filename")),
+    __param(1, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "getFile", null);
+__decorate([
     (0, common_1.Post)('/login'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "login", null);
+__decorate([
+    (0, common_1.Get)('/getUsers'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "getUsers", null);
 UsersController = __decorate([
     (0, common_1.Controller)('users'),
     __metadata("design:paramtypes", [users_service_1.UsersService])

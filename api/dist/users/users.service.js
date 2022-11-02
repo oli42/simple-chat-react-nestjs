@@ -28,6 +28,7 @@ let UsersService = class UsersService {
         user.email = body.email;
         const salt = await bcrypt.genSalt();
         user.password = await bcrypt.hash(body.password, salt);
+        user.online = true;
         await this.userRepository.save(user);
         return user;
     }
@@ -42,7 +43,13 @@ let UsersService = class UsersService {
         const match = bcrypt.compareSync(body.password, user.password);
         if (!match)
             return { error: "Mot de passe invalide" };
+        user.online = true;
+        await this.userRepository.save(user);
         return true;
+    }
+    async getUsers() {
+        const users = await this.userRepository.find();
+        return users;
     }
 };
 UsersService = __decorate([

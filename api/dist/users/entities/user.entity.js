@@ -32,6 +32,10 @@ __decorate([
     (0, typeorm_1.Column)({ type: 'varchar', default: 0 }),
     __metadata("design:type", String)
 ], User.prototype, "avatar", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ default: false }),
+    __metadata("design:type", Boolean)
+], User.prototype, "online", void 0);
 User = __decorate([
     (0, typeorm_1.Entity)('user')
 ], User);

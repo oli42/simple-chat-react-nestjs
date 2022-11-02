@@ -5,5 +5,7 @@ export declare class UsersController {
     private readonly service;
     createUser(body: any): Promise<any>;
     uploadFile(id: number, file: any, params: any): Promise<any>;
+    getFile(filename: string, res: any): Promise<void>;
     login(body: any): Promise<any>;
+    getUsers(): Promise<any>;
 }

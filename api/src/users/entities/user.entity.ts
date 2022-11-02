@@ -18,4 +18,7 @@ export default class User {
 
     @Column({ type: 'varchar', default: 0 })
 	avatar: string;
+
+    @Column({default: false})
+    online: boolean;
 }
