@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { addUser } from "../feature/userSlice";
+import { setUserList } from "../feature/userListSlice";
 
 
 
@@ -13,7 +14,7 @@ const Register = () => {
   const navigate = useNavigate();
   const [selectedFile, setSelectedFile] = useState<File>(Add);
 
-  const user = useAppSelector((state) => state.user);
+  const user = useAppSelector((state) => state.reducer.user);
   const dispatch = useAppDispatch();
 
   const handleSelect = async (e: any) => setSelectedFile(e.target.files[0])
@@ -35,8 +36,8 @@ const Register = () => {
     )
     const result = await response.json();
     dispatch({type: addUser,payload: result});
-
-
+    
+    
     console.log('reponse createUser' , result);
     if (err){
       setErr(true);
@@ -48,16 +49,16 @@ const Register = () => {
     const formData = new FormData();
     formData.append("file", selectedFile, selectedFile.name);
     let res = await fetch(
-			`http://localhost:4000/users/${result.id}/upload`,
+      `http://localhost:4000/users/${result.id}/upload`,
 			{
-				method: "POST",
+        method: "POST",
 				headers: {},
 				body: formData,
 			}
-		).then(res => res.json())
-    console.log('res', res);
-    navigate("/");
-    dispatch({type: addUser,payload: res});
+      ).then(res => res.json())
+      console.log('res', res);
+      navigate("/");
+      dispatch({type: addUser,payload: res});
 
     }
     return (

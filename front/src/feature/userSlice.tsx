@@ -26,6 +26,10 @@ const userSlice = createSlice({
             state.email = action.payload.email;
             state.avatar = action.payload.avatar;
             state.online = action.payload.online;
+        },
+        logout : (state, action) => {
+            state = initialState;
+            return state;
         }
     }
 })

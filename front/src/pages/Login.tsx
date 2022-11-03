@@ -1,14 +1,24 @@
-import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-// import { Link } from "react-router-dom";
-// import { signInWithEmailAndPassword } from "firebase/auth";
-// import { auth } from "../firebase";
+import React, { useEffect, useState } from "react";
+import { useNavigate, Link, useAsyncError } from "react-router-dom";
+import { io, Socket } from "socket.io-client";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { addUser } from "../feature/userSlice";
 
 const Login = () => {
+
+  const [socket, setSocket] = useState<Socket>()
   const [err, setErr] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const alertUser = "New user";
+  
+  useEffect(() => {
+      const newSocket = io('http://localhost:8000');
+      setSocket(newSocket)
+  }, [setSocket])
 
-    const handleSubmit = async (e: any) => {
+
+  const handleSubmit = async (e: any) => {
       e.preventDefault();
       let url = "http://localhost:4000/users/login";
       const response = await fetch(url, {method: "POST",
@@ -22,11 +32,14 @@ const Login = () => {
       })
   })
   const result = await response.json();
+  dispatch({type: addUser,payload: result});
 
   console.log('reponse login' , result);
   if (err){
     setErr(true);
   }
+  socket?.emit("newUserClient", alertUser);
+
   navigate("/");
   
   }

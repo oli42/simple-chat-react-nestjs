@@ -45,7 +45,15 @@ let UsersService = class UsersService {
             return { error: "Mot de passe invalide" };
         user.online = true;
         await this.userRepository.save(user);
-        return true;
+        return user;
+    }
+    async logout(body) {
+        const user = await this.userRepository.findOne({ where: { email: body.email } });
+        if (!user)
+            return { error: "No user" };
+        user.online = false;
+        await this.userRepository.save(user);
+        return user;
     }
     async getUsers() {
         const users = await this.userRepository.find();

@@ -34,6 +34,9 @@ let UsersController = class UsersController {
     async login(body) {
         return await this.service.login(body);
     }
+    async logout(body) {
+        return await this.service.logout(body);
+    }
     async getUsers() {
         return await this.service.getUsers();
     }
@@ -74,6 +77,13 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "login", null);
+__decorate([
+    (0, common_1.Post)('/logout'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "logout", null);
 __decorate([
     (0, common_1.Get)('/getUsers'),
     __metadata("design:type", Function),

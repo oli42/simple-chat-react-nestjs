@@ -13,6 +13,7 @@ const typeorm_1 = require("@nestjs/typeorm");
 const path_1 = require("path");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
+const chat_module_1 = require("./chat/chat.module");
 const users_module_1 = require("./users/users.module");
 let AppModule = class AppModule {
 };
@@ -31,7 +32,7 @@ AppModule = __decorate([
                 entities: [(0, path_1.join)(__dirname, '**', '*.entity.{ts,js}')],
                 synchronize: true,
             }),
-            users_module_1.UsersModule
+            users_module_1.UsersModule, chat_module_1.ChatModule
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

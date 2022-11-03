@@ -7,5 +7,6 @@ export declare class UsersController {
     uploadFile(id: number, file: any, params: any): Promise<any>;
     getFile(filename: string, res: any): Promise<void>;
     login(body: any): Promise<any>;
+    logout(body: any): Promise<any>;
     getUsers(): Promise<any>;
 }

@@ -65,6 +65,11 @@ export class UsersController {
         return await this.service.login(body);
     }
 
+    @Post('/logout')
+    async logout(@Body() body: any): Promise<any>{
+        return await this.service.logout(body);
+    }
+
     @Get('/getUsers')
     async getUsers(): Promise<any>{
         return await this.service.getUsers();
