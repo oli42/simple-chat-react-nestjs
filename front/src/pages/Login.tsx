@@ -11,7 +11,7 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const alertUser = "New user";
-  
+
   useEffect(() => {
       const newSocket = io('http://localhost:8000');
       setSocket(newSocket)

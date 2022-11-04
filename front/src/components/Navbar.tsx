@@ -38,10 +38,10 @@ const Navbar = () => {
     }
     return (
         <div className="navbar" >
-            <span className="logo">The Chat</span>
             <div className='user'>
+            <p >{user.username}</p>
                 <img src={user.avatar}></img>
-                <span>{user.username}</span> 
+                {/* <span></span>  */}
                 <button onClick={(e) => handleLogout(e)}>logout</button>
             </div>
         </div> 

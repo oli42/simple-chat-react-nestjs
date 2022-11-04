@@ -13,6 +13,7 @@ const user_entity_1 = require("../users/entities/user.entity");
 const chat_controller_1 = require("./chat.controller");
 const chat_gateway_1 = require("./chat.gateway");
 const chat_service_1 = require("./chat.service");
+const room_entity_1 = require("./entities/room.entity");
 let ChatModule = class ChatModule {
 };
 ChatModule = __decorate([
@@ -20,7 +21,7 @@ ChatModule = __decorate([
         controllers: [chat_controller_1.ChatController],
         providers: [chat_service_1.ChatService, chat_gateway_1.ChatGateway],
         imports: [
-            typeorm_1.TypeOrmModule.forFeature([user_entity_1.default]),
+            typeorm_1.TypeOrmModule.forFeature([user_entity_1.default, room_entity_1.default]),
         ],
         exports: [chat_service_1.ChatService]
     })

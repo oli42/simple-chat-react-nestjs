@@ -33,10 +33,63 @@ const Chats = () => {
         let url  =  `http://localhost:4000/users/getUsers`;
         const response = fetch(url)
         .then(response => response.json())
-        .then(data => dispatch({type: setUserList, payload: data}));
-        // .then(data => setUsers(data));
+        // .then(data => dispatch({type: setUserList, payload: data}));
+        .then(data => setUsers(data));
     },[alertUser])
 
+
+
+    async function handleRoom(User: any) {
+            
+        let url_ = "http://localhost:4000/chat/checkIfRoom";
+            const response = await fetch(url_, {method: "POST",
+            headers: {
+            // 'Authorization': `Bearer ${values[0]}`,
+            'Content-Type': 'application/json',
+            'cors': 'true'
+            },
+            body: JSON.stringify({
+            id1: User.username,
+            id2: user.username,
+            })
+        })
+        let result  = await response.json();
+
+   
+
+        let url_a = "http://localhost:4000/chat/leaveRoom";
+        await fetch(url_a, {
+            method: "POST",
+            headers: {
+                // 'Authorization': `Bearer ${values[0]}`,
+                'Content-Type': 'application/json',
+                'cors': 'true'
+            },
+            body: JSON.stringify({
+                // tag : RoomActive.tag,
+                username: user.username,
+            })
+        })
+
+       
+
+        let url_b = "http://localhost:4000/chat/joinRoom";
+            const res =  await fetch(url_b, {method: "POST",
+            headers: {
+                // 'Authorization': `Bearer ${values[0]}`,
+                'Content-Type': 'application/json',
+                'cors': 'true'
+            },
+            body: JSON.stringify({
+                id1: User.id,
+                id2: user.id,
+            })
+        }
+        ).then(rep => rep.json())
+        // dispatch({type: "User/addRoom",payload: response.tag})
+        // dispatch({type: "RoomActive/setRoomActive",payload: response}); 
+        
+    }
     return (
         // <div>
         //     {users.map((User: any) => (
@@ -53,7 +106,7 @@ const Chats = () => {
          {userList.map((User: any) => (
              User.online && User.username != user.username ?
          <div className='userChat'>
-             <div className="userChat" key={User.id} >
+             <div className="userChat" key={User.id} onClick={()=> handleRoom(User)}>
                  <img src={User.avatar}/>
                  <span>{User.username}</span> 
              </div> 
