@@ -19,10 +19,6 @@ export class ChatService {
     
     
    async checkOrCreateRoom(body){
-    console.log('back to', body.to);
-    console.log('back from', body.from);
-    // const reduser: any = Object.values(from)
-    // console.log('back reduser', reduser);
 
     const roomFrom = await this.roomRepository.findOne({where: {to: body.to[1], from: body.from}});
     if (roomFrom){

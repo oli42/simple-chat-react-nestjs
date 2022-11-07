@@ -37,6 +37,10 @@ __decorate([
     (0, typeorm_1.Column)({ default: false }),
     __metadata("design:type", Boolean)
 ], Room.prototype, "active", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ default: 0 }),
+    __metadata("design:type", Number)
+], Room.prototype, "counter", void 0);
 Room = __decorate([
     (0, typeorm_1.Entity)()
 ], Room);

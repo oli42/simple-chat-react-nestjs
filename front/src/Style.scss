@@ -114,7 +114,7 @@ $gif: url(https://i.pinimg.com/originals/3d/08/e0/3d08e03cb40252526fee2036a67f07
     }
 
     .sidebar {
-      flex: 0.5;
+      flex: .5;
       background-color: #3e3c61;
       position: relative;
 
@@ -170,11 +170,11 @@ $gif: url(https://i.pinimg.com/originals/3d/08/e0/3d08e03cb40252526fee2036a67f07
         }
       }
       .search {
-        border-top: 1px solid gray;
-        border-bottom: 1px solid gray;
+        // border-top: 1px solid gray;
+        // border-bottom: 1px solid gray;
         // background-color: rgb(250, 171, 35);
         background-color: rgb(244, 188, 91);
-        // background-color: rgb(7, 7, 72);
+        // background-color: rgb(2, 2, 94);
 
         .searchForm {
           padding: 10px;
@@ -182,18 +182,18 @@ $gif: url(https://i.pinimg.com/originals/3d/08/e0/3d08e03cb40252526fee2036a67f07
           input {
             background-color: transparent;
             border: none;
-            color: black;
+            color: rgb(255, 253, 253);
             outline: none;
 
             &::placeholder {
-              // color: black;
-              color: grey;
+              color: black;
+              // color: rgb(250, 248, 248);
               padding-left: 15px;
             }
           }
         }
+        
       }
-
       .userChat {
         padding: 10px;
         display: flex;
@@ -213,6 +213,24 @@ $gif: url(https://i.pinimg.com/originals/3d/08/e0/3d08e03cb40252526fee2036a67f07
           object-fit: cover;
           padding-left: 10px
         }
+        // notification {
+        //   background-color: #555;
+        //   color: white;
+        //   text-decoration: none;
+        //   padding: 15px 26px;
+        //   position: relative;
+        //   display: inline-block;
+        //   border-radius: 2px;
+        // }
+        //   badge {
+        //     position: absolute;
+        //     top: -10px;
+        //     right: -10px;
+        //     padding: 5px 10px;
+        //     border-radius: 50%;
+        //     background-color: red;
+        //     color: white;
+        //   }
 
         // .userChatInfo {
           span {
@@ -227,7 +245,9 @@ $gif: url(https://i.pinimg.com/originals/3d/08/e0/3d08e03cb40252526fee2036a67f07
             display: inline-block;
             vertical-align: middle
           }
+          
         // }
+        // overflow: scroll;
       }
     }
 
@@ -250,6 +270,9 @@ $gif: url(https://i.pinimg.com/originals/3d/08/e0/3d08e03cb40252526fee2036a67f07
         justify-content: space-between;
         padding: 10px;
         color: lightgray;
+      }
+      & .truc{
+        background-image: url(./img/On_air.gif);
       }
 
       .chatIcons {

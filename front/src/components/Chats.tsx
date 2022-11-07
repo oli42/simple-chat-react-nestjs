@@ -4,6 +4,7 @@ import { io, Socket } from 'socket.io-client';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { setUserList } from '../feature/userListSlice';
 import { addUser, fixRoom } from '../feature/userSlice';
+import ChatBox from './ChatBox';
 
 const Chats = () => {
     
@@ -13,8 +14,6 @@ const Chats = () => {
     const user = useAppSelector((state) => state.reducer.user);
     const dispatch = useAppDispatch();
     const [socket, setSocket] = useState<Socket>()
-    
-        // console.log('user1', user);
     
     useEffect(() => {
         const newSocket = io('http://localhost:8000');
@@ -35,22 +34,15 @@ const Chats = () => {
         let url  =  `http://localhost:4000/users/getUsers`;
         const response = fetch(url)
         .then(response => response.json())
-        // .then(data => dispatch({type: setUserList, payload: data}));
-        .then(data => setUsers(data));
+        .then(data => dispatch({type: setUserList, payload: data}));
+        // .then(data => setUsers(data));
     },[alertUser])
-    // console.log('user2', user);
 
     
     async function HandleRoom(username: {}) {
 
-        // const values = (User.username);
-        // var theObject: any = JSON.stringify(theObject.User.username.toString());
-        // const values = JSON.stringify(username.toString());
-
-        // const values = Object.values(User.username);
         const newUser = Object.values(username);
-        // const no = JSON.stringify(newUser);
-        const reduser = user;
+        // const reduser = user;
         let url_ = "http://localhost:4000/chat/checkOrCreateRoom";
             const res: any = await fetch(url_, {method: "POST",
             headers: {
@@ -64,73 +56,32 @@ const Chats = () => {
             })
             const result: any  = await res.json();
             dispatch({type:fixRoom, payload: {tagFrom: result.tagFrom, roomId: result.id}});
-            console.log('retour de createroom', )
-            console.log('checkOrCreate', result);
-            // console.log('checkOrCreate Object.values', Object.values(result));
-        // return;
-
-
-
-   
-
-        // let url_a = "http://localhost:4000/chat/leaveRoom";
-        // await fetch(url_a, {
-        //     method: "POST",
-        //     headers: {
-        //         // 'Authorization': `Bearer ${values[0]}`,
-        //         'Content-Type': 'application/json',
-        //         'cors': 'true'
-        //     },
-        //     body: JSON.stringify({
-        //         // tag : RoomActive.tag,
-        //         username: user.username,
-        //     })
-        // })
-
-       
-
-        // let url_b = "http://localhost:4000/chat/joinRoom";
-        //     const res =  await fetch(url_b, {method: "POST",
-        //     headers: {
-        //         // 'Authorization': `Bearer ${values[0]}`,
-        //         'Content-Type': 'application/json',
-        //         'cors': 'true'
-        //     },
-        //     body: JSON.stringify({
-        //         id1: User.id,
-        //         id2: user.id,
-        //     })
-        // }
-        // ).then(rep => rep.json());
-        // dispatch({type: "User/addRoom",payload: response.tag})
-        // dispatch({type: "RoomActive/setRoomActive",payload: response}); 
         
     }
     return (
-        <div>
-            {users.map((User: any) => (
-                User.online && User.username != user.username ?
-            <div className='userChat'>
-                {/* <div className="userChat" key={User.id} onClick={()=> HandleRoom(JSON.stringify(User.username.toString()))}> */}
-                <div className="userChat" key={User.id} onClick={()=> HandleRoom(User)}>
-
-                    <img src={User.avatar}/>
-                    <span>{User.username}</span> 
-                </div> 
-            </div> : null
-            ))}
-        </div>
-    //      <div>
-    //      {userList.map((User: any) => (
-    //          User.online && User.username !== user.username ?
-    //      <div className='userChat'>
-    //          <div className="userChat" key={User.id} >
-    //              <img src={User.avatar}onClick={()=> {HandleRoom(User)}}/>
-    //              <span>{User.username}</span> 
-    //          </div> 
-    //      </div> : null
-    //      ))}
-    //  </div>
+        // <div>
+        //     {users.map((User: any) => (
+        //         User.online && User.username != user.username ?
+        //     <div className='userChat'>
+        //         {/* <div className="userChat" key={User.id} onClick={()=> HandleRoom(JSON.stringify(User.username.toString()))}> */}
+        //         <div className="userChat" key={User.id} onClick={()=> HandleRoom(User)}>
+        //             <img src={User.avatar}/>
+        //             <span>{User.username}</span> 
+        //         </div> 
+        //     </div> : null
+        //     ))}
+        // </div>
+         <div>
+         {userList.map((User: any) => (
+             User.online && User.username !== user.username ?
+         <div className='userChat'>
+             <div className="userChat" key={User.id} onClick={()=> {HandleRoom(User)}}>
+                 <img src={User.avatar}/>
+                 <span>{User.username}</span> 
+             </div> 
+         </div> : null
+         ))}
+     </div>
     )
 }
 

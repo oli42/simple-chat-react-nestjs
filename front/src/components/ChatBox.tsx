@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import MessageInput from "./MessageInput";
 import { useAppSelector } from "../app/hooks";
 import { io, Socket } from "socket.io-client";
+import con from '../img/con.png';
 
 
 const ChatBox = () => {
@@ -59,7 +60,8 @@ const ChatBox = () => {
   return (
     <div className="chat">
       <div className="chatInfo">
-        {user.roomId != 0 ? <span>{user.tagFrom}|{user.roomId}</span> : null}
+      {/* <div className={`chatInfo ${user.roomId != "0" && "truc"}`}> */}
+        {user.roomId != 0 ? <span>{user.tagFrom} <span style={{color: "red"}} >----</span></span> : null}
       </div>
         <div className='messages '>
           {

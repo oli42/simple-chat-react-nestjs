@@ -41,4 +41,10 @@ import { ChatService } from './chat.service';
       this.chatService.saveMessage(message);
 
     }
+
+    // @SubscribeMessage('refreshClient')
+    // handleRefresh(@ConnectedSocket() client: Socket, @MessageBody()  message: any): void {
+    //   this.server.emit('refreshServer', "refresh");
+
+    // }
 }

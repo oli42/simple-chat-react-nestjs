@@ -5,4 +5,5 @@ export declare class Room {
     tagFrom: string;
     tagTo: string;
     active: boolean;
+    counter: number;
 }

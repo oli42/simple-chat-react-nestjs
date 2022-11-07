@@ -3,12 +3,15 @@ import { InjectRepository } from "@nestjs/typeorm";
 import User from "./entities/user.entity";
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import { Room } from "src/chat/entities/room.entity";
 
 @Injectable()
 export class UsersService {
     constructor(
 		@InjectRepository(User)
 		public userRepository: Repository<User>,
+		@InjectRepository(Room)
+    	private readonly roomRepository: Repository<Room>,
        
 	) {}
 
@@ -52,5 +55,34 @@ export class UsersService {
 	async getUsers() : Promise<any> {
 		const users = await this.userRepository.find();
 		return users;
+	}
+
+	async checkUser(body): Promise<any>{
+		const user = await this.userRepository.findOne({where:{ username:body.username }});
+		if (!user)
+			return {error: "No user"};
+			
+		const roomFrom = await this.roomRepository.findOne({where: {to: body.to[1], from: body.from}});
+		if (roomFrom){
+			roomFrom.active = true;
+		await this.roomRepository.save(roomFrom);
+	
+			return (roomFrom);
+		}
+		const roomTo = await this.roomRepository.findOne({where: {from: body.to[1], to:body.from }});
+		if (roomTo){
+			roomTo.active = true;
+		await this.roomRepository.save(roomTo);
+	
+			return (roomTo);
+		}
+		const newRoom = await this.roomRepository.create();
+		newRoom.from = body.from;
+		newRoom.to = body.to[1];
+		newRoom.tagFrom = body.from + "|" + body.to[1];
+		newRoom.tagTo = body.to[1] + "|" + body.from;
+		newRoom.active = true;
+		await this.roomRepository.save(newRoom);
+		return newRoom;
 	}
 }

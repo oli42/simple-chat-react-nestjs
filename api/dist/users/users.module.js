@@ -12,6 +12,7 @@ const user_entity_1 = require("./entities/user.entity");
 const users_controller_1 = require("./users.controller");
 const users_service_1 = require("./users.service");
 const typeorm_1 = require("@nestjs/typeorm");
+const room_entity_1 = require("../chat/entities/room.entity");
 let UsersModule = class UsersModule {
 };
 UsersModule = __decorate([
@@ -19,7 +20,7 @@ UsersModule = __decorate([
         controllers: [users_controller_1.UsersController],
         providers: [users_service_1.UsersService],
         imports: [
-            typeorm_1.TypeOrmModule.forFeature([user_entity_1.default])
+            typeorm_1.TypeOrmModule.forFeature([user_entity_1.default, room_entity_1.Room])
         ],
         exports: [users_service_1.UsersService]
     })

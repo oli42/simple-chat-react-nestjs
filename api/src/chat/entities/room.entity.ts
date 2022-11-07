@@ -21,4 +21,7 @@ export  class Room {
 
     @Column({default: false})
     active: boolean;
+
+    @Column({default: 0})
+    counter: number
 }
