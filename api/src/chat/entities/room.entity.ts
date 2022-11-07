@@ -1,18 +1,24 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, JoinColumn, OneToMany} from 'typeorm';
 
 
-@Entity('room')
-export default class Room {
+@Entity()
+export  class Room {
 
 	@PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
-    id1: number;
+    @Column({nullable: true})
+    from: string;
 
-    @Column()
-    id2: number;
+    @Column({nullable: true})
+    to: string;
 
-    @Column()
+    @Column({nullable: true})
+    tagFrom: string;
+
+    @Column({nullable: true})
+    tagTo: string;
+
+    @Column({default: false})
     active: boolean;
 }

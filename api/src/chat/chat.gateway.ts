@@ -17,24 +17,28 @@ import { ChatService } from './chat.service';
     server: Server;
 
     afterInit(server: Server) {
-      // throw new Error('Method not implemented.');
       console.log('initialized');
     }
     
     handleConnection(client: Socket, ...args: any[]) {
       console.log(`Client connected: ${client.id}`);
-  
-      // throw new Error('Method not implemented.');
     }
     
     handleDisconnect(client: Socket) {
       console.log(`Client disconnected: ${client.id}`);
-  
-      // throw new Error('Method not implemented.');
     }
+
     @SubscribeMessage('newUserClient')
     handleNewMessage(@ConnectedSocket() client: Socket, @MessageBody()  alert: any): void {
       console.log('Received message in Back', alert);
       this.server.emit('newUserServer', alert);
+    }
+
+    @SubscribeMessage('messageFromClient')
+    handleMessage(@ConnectedSocket() client: Socket, @MessageBody()  message: any): void {
+      console.log('Received message in Back', message);
+      this.server.emit('messageFromServer', message);
+      this.chatService.saveMessage(message);
+
     }
 }

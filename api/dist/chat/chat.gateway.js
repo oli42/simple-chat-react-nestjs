@@ -34,6 +34,11 @@ let ChatGateway = class ChatGateway {
         console.log('Received message in Back', alert);
         this.server.emit('newUserServer', alert);
     }
+    handleMessage(client, message) {
+        console.log('Received message in Back', message);
+        this.server.emit('messageFromServer', message);
+        this.chatService.saveMessage(message);
+    }
 };
 __decorate([
     (0, websockets_1.WebSocketServer)(),
@@ -47,6 +52,14 @@ __decorate([
     __metadata("design:paramtypes", [socket_io_1.Socket, Object]),
     __metadata("design:returntype", void 0)
 ], ChatGateway.prototype, "handleNewMessage", null);
+__decorate([
+    (0, websockets_1.SubscribeMessage)('messageFromClient'),
+    __param(0, (0, websockets_1.ConnectedSocket)()),
+    __param(1, (0, websockets_1.MessageBody)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [socket_io_1.Socket, Object]),
+    __metadata("design:returntype", void 0)
+], ChatGateway.prototype, "handleMessage", null);
 ChatGateway = __decorate([
     (0, websockets_1.WebSocketGateway)(8000, { cors: '*' }),
     __metadata("design:paramtypes", [chat_service_1.ChatService])

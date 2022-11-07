@@ -5,4 +5,5 @@ export default class User {
     password: string;
     avatar: string;
     online: boolean;
+    room: string;
 }

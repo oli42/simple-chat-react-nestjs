@@ -1,33 +1,32 @@
 import React, { useState } from 'react'
 import Img from "../img/img.png";
 import Attach from "../img/attach.png";
-import { useSelector } from 'react-redux';
 import { useAppSelector } from '../app/hooks';
 
 const MessageInput = ({send}: {send: (messagedata: any) => void}) => {
 
   const [value, setValue] = useState("");
-  // const user = useAppSelector((state) => state.reducer.user);
-  // const RoomActive = useSelector((state: any) => state.RoomActive);
+  const user = useAppSelector((state) => state.reducer.user);
 
   
-  // const messagedata = {
-  //   fromUsername: String(user.username),
-  //     time:
-  //       new Date(Date.now()).getHours() +
-  //       ":" +
-  //       new Date(Date.now()).getMinutes(),
-  //     text: value,
-  //     room: String(RoomActive.tag),
-  //   };
+  const messagedata = {
+    fromUsername: user.username,
+      time:
+        new Date(Date.now()).getHours() +
+        ":" +
+        new Date(Date.now()).getMinutes(),
+      text: value,
+      room: user.roomId,
+    };
 
   
-  // const handleClick = (value: string) => { 
+  const handleClick = (value: string) => { 
 
-  //     messagedata.text = value;
-  //     send(messagedata);
-  //     setValue("");
-  // }
+      messagedata.text = value;
+      console.log('messageData', messagedata)
+      send(messagedata);
+      setValue("");
+  }
   
   return (
                   
@@ -41,8 +40,8 @@ const MessageInput = ({send}: {send: (messagedata: any) => void}) => {
               <label htmlFor="file">
             <img src={Img} alt="" />
           </label>
-        {/* <button onClick={() => handleClick(value)}> Send</button> */}
-        <button > Send</button>
+        <button onClick={() => handleClick(value)}> Send</button>
+        {/* <button > Send</button> */}
       </div>
     </div>
   );

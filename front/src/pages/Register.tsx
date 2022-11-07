@@ -57,7 +57,7 @@ const Register = () => {
 			}
       ).then(res => res.json())
       console.log('res', res);
-      navigate("/");
+      navigate("/Home");
       dispatch({type: addUser,payload: res});
 
     }

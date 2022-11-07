@@ -4,13 +4,14 @@ import User from "src/users/entities/user.entity";
 import { ChatController } from "./chat.controller";
 import { ChatGateway } from "./chat.gateway";
 import { ChatService } from "./chat.service";
-import Room from "./entities/room.entity";
+import { Message } from "./entities/message.entity";
+import {Room} from "./entities/room.entity";
 
 @Module({
     controllers: [ChatController],
     providers: [ChatService, ChatGateway], 
     imports: [
-      TypeOrmModule.forFeature([User, Room]), 
+      TypeOrmModule.forFeature([User, Room, Message]), 
    ],
    exports: [ChatService]
   

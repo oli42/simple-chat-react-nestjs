@@ -105,7 +105,7 @@ $gif: url(https://i.pinimg.com/originals/3d/08/e0/3d08e03cb40252526fee2036a67f07
   .container {
     border: 1px solid white;
     border-radius: 10px;
-    width: 50%;
+    width: 30%;
     height: 80%;
     display: flex;
     overflow: hidden;
@@ -174,6 +174,7 @@ $gif: url(https://i.pinimg.com/originals/3d/08/e0/3d08e03cb40252526fee2036a67f07
         border-bottom: 1px solid gray;
         // background-color: rgb(250, 171, 35);
         background-color: rgb(244, 188, 91);
+        // background-color: rgb(7, 7, 72);
 
         .searchForm {
           padding: 10px;
@@ -287,7 +288,7 @@ $gif: url(https://i.pinimg.com/originals/3d/08/e0/3d08e03cb40252526fee2036a67f07
             }
           }
           .messageContent {
-            max-width: 80%;
+            max-width: 100%;
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -297,6 +298,7 @@ $gif: url(https://i.pinimg.com/originals/3d/08/e0/3d08e03cb40252526fee2036a67f07
               padding: 10px 20px;
               border-radius: 0px 10px 10px 10px;
               max-width: max-content;
+              color: black;
             }
 
             img {
@@ -306,7 +308,10 @@ $gif: url(https://i.pinimg.com/originals/3d/08/e0/3d08e03cb40252526fee2036a67f07
 
           &.owner {
             flex-direction: row-reverse;
+            .messageInfo{
+              align-items: flex-end;
 
+            }
             .messageContent {
               align-items: flex-end;
               p {

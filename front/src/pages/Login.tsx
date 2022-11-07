@@ -40,7 +40,8 @@ const Login = () => {
   }
   socket?.emit("newUserClient", alertUser);
 
-  navigate("/");
+  navigate("/Home");
+  
   
   }
   return (

@@ -6,6 +6,8 @@ interface UserState {
     email: string,
     avatar: string,
     online: boolean,
+    tagFrom: string,
+    roomId: number
 }
 
 const initialState: UserState = {
@@ -14,6 +16,8 @@ const initialState: UserState = {
     email: "",
     avatar: "",
     online: false,
+    tagFrom: "",
+    roomId: 0,
 }
 
 const userSlice = createSlice({
@@ -26,6 +30,18 @@ const userSlice = createSlice({
             state.email = action.payload.email;
             state.avatar = action.payload.avatar;
             state.online = action.payload.online;
+            state.tagFrom = "";
+            state.roomId = 0;
+
+        },
+        fixRoom : (state, action: PayloadAction<UserState>) =>{
+            // state.id = state.id ;
+            // state.username = state.username;
+            // state.email = state.email;
+            // state.avatar = state.avatar;
+            // state.online = state.online ;
+            state.tagFrom = action.payload.tagFrom;
+            state.roomId = action.payload.roomId;
         },
         logout : (state, action) => {
             state = initialState;
@@ -34,5 +50,5 @@ const userSlice = createSlice({
     }
 })
 
-export const { addUser } =  userSlice.actions;
+export const { addUser, fixRoom } =  userSlice.actions;
 export default userSlice.reducer;

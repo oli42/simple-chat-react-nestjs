@@ -1,6 +1,8 @@
-export default class Room {
+export declare class Room {
     id: number;
-    id1: number;
-    id2: number;
+    from: string;
+    to: string;
+    tagFrom: string;
+    tagTo: string;
     active: boolean;
 }

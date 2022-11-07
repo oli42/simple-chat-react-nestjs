@@ -9,36 +9,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Room = void 0;
+exports.Message = void 0;
 const typeorm_1 = require("typeorm");
-let Room = class Room {
+let Message = class Message {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], Room.prototype, "id", void 0);
+], Message.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
-], Room.prototype, "from", void 0);
+], Message.prototype, "time", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
-], Room.prototype, "to", void 0);
+], Message.prototype, "text", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
-], Room.prototype, "tagFrom", void 0);
+], Message.prototype, "fromUsername", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
-], Room.prototype, "tagTo", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ default: false }),
-    __metadata("design:type", Boolean)
-], Room.prototype, "active", void 0);
-Room = __decorate([
+], Message.prototype, "roomTag", void 0);
+Message = __decorate([
     (0, typeorm_1.Entity)()
-], Room);
-exports.Room = Room;
-//# sourceMappingURL=room.entity.js.map
+], Message);
+exports.Message = Message;
+//# sourceMappingURL=message.entity.js.map

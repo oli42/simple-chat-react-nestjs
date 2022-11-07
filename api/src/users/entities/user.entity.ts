@@ -21,4 +21,7 @@ export default class User {
 
     @Column({default: false})
     online: boolean;
+
+    @Column({ type: 'varchar', default: 0 })
+	room: string;
 }
