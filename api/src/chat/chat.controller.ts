@@ -24,4 +24,9 @@ export class ChatController {
     {
         return await this.service.getRoomMessages(id);
     }
+
+    @Post('createGlobalRoom')
+    async createGlobalRoom(): Promise<any>{
+        return await this.service.createGlobalRoom();
+    }
 }

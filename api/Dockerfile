@@ -1,6 +1,6 @@
 FROM node:16.16.0
 
-WORKDIR /api-rest
+WORKDIR /api
 COPY package.json .
 RUN npm install
 EXPOSE 4000

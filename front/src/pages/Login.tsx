@@ -39,11 +39,8 @@ const Login = () => {
     setErr(true);
   }
   socket?.emit("newUserClient", alertUser);
-
   navigate("/Home");
-  
-  
-  }
+}
   return (
     <div className="formContainer">
       <div className="formWrapper">
@@ -55,7 +52,7 @@ const Login = () => {
           <button>Sign in</button>
           {/* {err && <span>Something went wrong</span>} */}
         </form>
-        <p>You don't have an account? <Link to="/register">Register</Link></p>
+        <p>You don't have an account? <Link to="/">Register</Link></p>
       </div>
     </div>
   );

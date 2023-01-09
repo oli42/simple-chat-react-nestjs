@@ -28,6 +28,9 @@ let ChatController = class ChatController {
     async getRoomMessages(id, body) {
         return await this.service.getRoomMessages(id);
     }
+    async createGlobalRoom() {
+        return await this.service.createGlobalRoom();
+    }
 };
 __decorate([
     (0, common_1.Inject)(chat_service_1.ChatService),
@@ -55,6 +58,12 @@ __decorate([
     __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)
 ], ChatController.prototype, "getRoomMessages", null);
+__decorate([
+    (0, common_1.Post)('createGlobalRoom'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], ChatController.prototype, "createGlobalRoom", null);
 ChatController = __decorate([
     (0, common_1.Controller)('chat'),
     __metadata("design:paramtypes", [chat_service_1.ChatService])

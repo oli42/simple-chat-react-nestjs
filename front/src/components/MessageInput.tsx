@@ -31,7 +31,7 @@ const MessageInput = ({send}: {send: (messagedata: any) => void}) => {
   return (
                   
       <div className='messagesInput'>
-          <input type="text" onChange={(e)=>{setValue(e.target.value)}} placeholder="Type something..."value={value} />
+          <input type="text" onChange={(e)=>{setValue(e.target.value)}} placeholder="Time to chat..."value={value} />
               <div className="send">
                 {/* <img src={Attach} alt="" /> */}
                 <input type="file" style={{ display: "none" }} id="file"

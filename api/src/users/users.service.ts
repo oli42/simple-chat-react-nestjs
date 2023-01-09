@@ -15,7 +15,10 @@ export class UsersService {
        
 	) {}
 
-	async createUser(body): Promise<User> {
+	async createUser(body): Promise<any> {
+		const exist = await this.userRepository.findOne({where: {email: body.email}});
+		if (exist)
+			return false;
 		const user = await this.userRepository.create();
         user.username = body.username;
         user.email = body.email;

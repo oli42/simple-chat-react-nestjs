@@ -5,7 +5,7 @@ export declare class UsersService {
     userRepository: Repository<User>;
     private readonly roomRepository;
     constructor(userRepository: Repository<User>, roomRepository: Repository<Room>);
-    createUser(body: any): Promise<User>;
+    createUser(body: any): Promise<any>;
     updateAvatar(id: number, image: string): Promise<any>;
     login(body: any): Promise<any>;
     logout(body: any): Promise<any>;

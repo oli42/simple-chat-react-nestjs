@@ -25,6 +25,9 @@ let UsersService = class UsersService {
         this.roomRepository = roomRepository;
     }
     async createUser(body) {
+        const exist = await this.userRepository.findOne({ where: { email: body.email } });
+        if (exist)
+            return false;
         const user = await this.userRepository.create();
         user.username = body.username;
         user.email = body.email;

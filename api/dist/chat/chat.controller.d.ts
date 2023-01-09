@@ -6,4 +6,5 @@ export declare class ChatController {
     checkOrCreateRoom(body: any): Promise<any>;
     saveMessage(body: any): Promise<any>;
     getRoomMessages(id: number, body: any): Promise<any>;
+    createGlobalRoom(): Promise<any>;
 }

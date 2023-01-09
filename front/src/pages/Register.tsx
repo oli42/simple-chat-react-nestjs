@@ -10,7 +10,7 @@ import { setUserList } from "../feature/userListSlice";
 
 
 const Register = () => {
-  const [err, setErr] = useState(false);
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
   const [selectedFile, setSelectedFile] = useState<File>(Add);
 
@@ -33,15 +33,17 @@ const Register = () => {
           password: e.target[2].value,
         })
       }
-    )
-    const result = await response.json();
+      )
+      const result = await response.json();
+      if (!result){
+        setError(true);
+        navigate("/");
+        return ;
+      }
+    console.log('reponse createUser' , result);
     dispatch({type: addUser,payload: result});
     
     
-    console.log('reponse createUser' , result);
-    if (err){
-      setErr(true);
-    }
     
     
     console.log('selectedFile', selectedFile);
@@ -78,7 +80,7 @@ const Register = () => {
                 </label>
                 <button>Sign up</button>
                 {/* {err && <span>File size cannot exceed more than 1MB</span>} */}
-                {err}
+                {error && <span>Email Already used</span> }
             </form>
             <p>
                 Already registered ? <Link to="/Login">Login</Link>

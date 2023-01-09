@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import MessageInput from "./MessageInput";
 import { useAppSelector } from "../app/hooks";
 import { io, Socket } from "socket.io-client";
@@ -32,7 +32,6 @@ const ChatBox = () => {
       const ret = fetch(url)
       .then(response => response.json())
       .then(data => setMessages(data))
-      console.log('ok');
   }, [messages.length])
 
   const send = (messageData: any) => {
@@ -61,16 +60,16 @@ const ChatBox = () => {
     <div className="chat">
       <div className="chatInfo">
       {/* <div className={`chatInfo ${user.roomId != "0" && "truc"}`}> */}
-        {user.roomId != 0 ? <span>{user.tagFrom} <span style={{color: "red"}} >----</span></span> : null}
+        {<span>{user.tagFrom} <span style={{color: "red"}} >----</span></span>}
       </div>
         <div className='messages '>
           {
               messages.length > 0 ?
-              messages.map((message: any, index: number) => (  
+              messages.slice(-20).map((message: any, index: number) => (  
                   message.roomTag == user.roomId ?
                   <div className={`message ${message.fromUsername === user.username && "owner"}`}>
                       <div key={message.index} className='messageInfo'>
-                          <span>{message.fromUsername} |{message.time}</span>
+                          <span >{message.fromUsername} |{message.time}</span>
                           <div className='messageContent'>
                               <p>{message.text}</p>
                           </div>

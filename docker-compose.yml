@@ -3,7 +3,7 @@ version: '3.7'
 services:
   api-rest:
     build:
-      context: api-rest
+      context: api
       dockerfile: Dockerfile
     container_name: back
     ports:
@@ -16,7 +16,7 @@ services:
 
   front-end:
     build:
-      context: front-end
+      context: front
       dockerfile: Dockerfile
     container_name: front
     ports:
@@ -30,9 +30,9 @@ services:
     container_name: postgres-db
     restart: always
     ports:
-      - 5432:5432
+      - 6543:5432
     env_file:
-      - database.env
+      - api/.env
     volumes:
       - postgres:/var/lib/postgresql/data
     networks:

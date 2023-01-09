@@ -1,18 +1,4 @@
-@mixin mobile {
-  @media screen and (max-width: 480px) {
-    @content;
-  }
-}
-@mixin tablet {
-  @media screen and (max-width: 768px) {
-    @content;
-  }
-}
-@mixin laptop {
-  @media screen and (max-width: 1200px) {
-    @content;
-  }
-}
+
 
 $gif: url(https://i.pinimg.com/originals/3d/08/e0/3d08e03cb40252526fee2036a67f07f1.gif);
 
@@ -105,37 +91,44 @@ $gif: url(https://i.pinimg.com/originals/3d/08/e0/3d08e03cb40252526fee2036a67f07
   .container {
     border: 1px solid white;
     border-radius: 10px;
-    width: 30%;
+    width: 40%;
     height: 80%;
     display: flex;
     overflow: hidden;
-    @include tablet {
-     width: 90%;
-    }
+    overflow-y: auto;
+
 
     .sidebar {
       flex: .5;
-      background-color: #3e3c61;
+      border-left: 1px solid white;
+      // background-color: #3e3c61;
+      // background-color: #01121a;
+      // background-color: #1a0000;
+      background-image: $gif;
+
       position: relative;
+    // overflow-y: auto;
+
 
       .navbar {
         display: flex;
         align-items: center;
-        background-color: #2f2d52;
+        // background-color: #2f2d52;
+        // background-color: #52412d;
+        background-color: #e39a08;
+
         height: 50px;
         padding: 10px;
         padding-right: 20px;
         padding-left: 20px;
         justify-content: space-around;
-        color: #ddddf7;
+        // color: #ddddf7;
+        color: #1a0000;
 
         .logo {
           font-size: 18px;
           font-weight: bold;
           // padding-left: 10px;
-          @include tablet {
-            display: none;
-          }
         }
 
         .user {
@@ -154,46 +147,59 @@ $gif: url(https://i.pinimg.com/originals/3d/08/e0/3d08e03cb40252526fee2036a67f07
             font-weight: 500;
             vertical-align: 4px;
           }
-
+          
           button {
-            background-color: #5d5b8d;
-            color: #ddddf7;
+            // background-color: #5d5b8d;
+            background-color: #8da4f1;
+            
+            // color: #ddddf7;
+            color: white;
             font-size: 12px;
             border: none;
             max-height: 45px;
             cursor: pointer;
-            @include tablet {
-              position: absolute;
-              bottom: 10px;
-            }
+          
           }
         }
       }
-      .search {
-        // border-top: 1px solid gray;
-        // border-bottom: 1px solid gray;
-        // background-color: rgb(250, 171, 35);
-        background-color: rgb(244, 188, 91);
-        // background-color: rgb(2, 2, 94);
-
-        .searchForm {
-          padding: 10px;
-
-          input {
-            background-color: transparent;
-            border: none;
-            color: rgb(255, 253, 253);
-            outline: none;
-
-            &::placeholder {
-              color: black;
-              // color: rgb(250, 248, 248);
-              padding-left: 15px;
-            }
-          }
-        }
+      // .search {
+      //   // background-image: $gif;
+      //   background-image: url(./img/forum.gif);
         
-      }
+      //   p {
+      //     font-size: 18px;
+      //     color: lightgray;
+      //     display: inline-block;
+      //     vertical-align: middle;
+      //     padding-left: 35px
+      //   }
+      //   &:hover {
+      //     // background-color: #2f2d52;
+      //     // background-color: #e39a08;
+      //     p{color:#e39a08;}
+      //     cursor: pointer;
+
+      //   }
+          
+      //   .searchForm {
+      //     padding: 10px;
+
+      //     input {
+      //       background-color: transparent;
+      //       border: none;
+      //       color: rgb(255, 253, 253);
+      //       outline: none;
+
+      //       &::placeholder {
+      //         color: black;
+      //         // color: rgb(250, 248, 248);
+      //         padding-left: 15px;
+      //       }
+      //     }
+      //   }
+        
+      // }
+      // .usereBox {
       .userChat {
         padding: 10px;
         display: flex;
@@ -203,60 +209,31 @@ $gif: url(https://i.pinimg.com/originals/3d/08/e0/3d08e03cb40252526fee2036a67f07
         cursor: pointer;
 
         &:hover {
-          background-color: #2f2d52;
+          background-color: #e39a08;
+
         }
 
         img {
-          width: 60px;
-          height: 60px;
+          width: 45px;
+          height: 45px;
           border-radius: 50%;
           object-fit: cover;
           padding-left: 10px
         }
-        // notification {
-        //   background-color: #555;
-        //   color: white;
-        //   text-decoration: none;
-        //   padding: 15px 26px;
-        //   position: relative;
-        //   display: inline-block;
-        //   border-radius: 2px;
-        // }
-        //   badge {
-        //     position: absolute;
-        //     top: -10px;
-        //     right: -10px;
-        //     padding: 5px 10px;
-        //     border-radius: 50%;
-        //     background-color: red;
-        //     color: white;
-        //   }
 
-        // .userChatInfo {
-          span {
-            font-size: 18px;
-            font-weight: 500;
-            // display: inline-block;
-            // vertical-align: middle
-          }
-          p {
-            font-size: 14px;
-            color: lightgray;
-            display: inline-block;
-            vertical-align: middle
-          }
+        span {
+          font-size: 18px;
+          font-weight: 500;
+        }
+        p {
+          font-size: 14px;
+          color: lightgray;
+          display: inline-block;
+          vertical-align: middle
+        }
           
-        // }
-        // overflow: scroll;
       }
     }
-
-
-    // .sidebar2 {
-    //   flex: 0.5;
-    //   background-color: #3e3c61;
-    //   position: relative;
-    // }
 
 
     .chat {
@@ -264,7 +241,10 @@ $gif: url(https://i.pinimg.com/originals/3d/08/e0/3d08e03cb40252526fee2036a67f07
 
       .chatInfo {
         height: 50px;
-        background-color: #5d5b8d;
+        background-color: #1a0000;
+      
+
+
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -286,11 +266,14 @@ $gif: url(https://i.pinimg.com/originals/3d/08/e0/3d08e03cb40252526fee2036a67f07
       }
 
       .messages {
-        // background-color: #301a1a;
-        background-color: #ddddf7;
+        
+        // background-image: $gif;
+        // background-image: url();
+        background-color: rgb(76, 65, 54);
+
         padding: 10px;
         height: calc(100% - 160px);
-        overflow: scroll;
+        overflow-y: auto;
 
         .message {
           display: flex;
@@ -308,10 +291,14 @@ $gif: url(https://i.pinimg.com/originals/3d/08/e0/3d08e03cb40252526fee2036a67f07
               height: 40px;
               border-radius: 50%;
               object-fit: cover;
+            } 
+            span {
+              color:orange;
             }
+
           }
           .messageContent {
-            max-width: 100%;
+            max-width: 80%;
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -324,6 +311,8 @@ $gif: url(https://i.pinimg.com/originals/3d/08/e0/3d08e03cb40252526fee2036a67f07
               color: black;
             }
 
+           
+
             img {
               width: 50%;
             }
@@ -333,14 +322,17 @@ $gif: url(https://i.pinimg.com/originals/3d/08/e0/3d08e03cb40252526fee2036a67f07
             flex-direction: row-reverse;
             .messageInfo{
               align-items: flex-end;
-
+              span {
+                color:white;
+                padding-right: 0px;
+              }
             }
             .messageContent {
               align-items: flex-end;
               p {
-                background-color: #8da4f1;
-                color: white;
+                background-color: #e39a08;
                 border-radius: 10px 0px 10px 10px;
+                color: white;
               }
             }
           }
@@ -349,7 +341,9 @@ $gif: url(https://i.pinimg.com/originals/3d/08/e0/3d08e03cb40252526fee2036a67f07
 
       .messagesInput {
         height: 50px;
-        background-color: white;
+        background-color: #1a0000;
+        border-right: 1px white;
+
         padding: 10px;
         display: flex;
         align-items: center;
@@ -358,8 +352,9 @@ $gif: url(https://i.pinimg.com/originals/3d/08/e0/3d08e03cb40252526fee2036a67f07
         input {
           width: 100%;
           border: none;
+          background-color: #1a0000;
           outline: none;
-          color: #2f2d52;
+          color: lightgray;
           font-size: 18px;
 
           &::placeholder {

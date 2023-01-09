@@ -8,6 +8,7 @@ export declare class ChatService {
     private readonly messageRepository;
     constructor(userRepository: Repository<User>, roomRepository: Repository<Room>, messageRepository: Repository<Message>);
     checkOrCreateRoom(body: any): Promise<Room>;
+    createGlobalRoom(): Promise<Room>;
     saveMessage(message: any): Promise<Message>;
     getRoomMessages(id: any): Promise<false | Message[]>;
 }

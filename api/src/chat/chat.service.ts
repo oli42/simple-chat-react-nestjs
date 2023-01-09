@@ -44,6 +44,20 @@ export class ChatService {
     return newRoom;
    }
 
+   async createGlobalRoom(){
+
+    const room = await this.roomRepository.findOne({where: {from: "global", to: "global"}});
+
+    if (!room){
+      const room = await this.roomRepository.create();
+      room.from = "global";
+      room.to = "global";
+      room.tagFrom = "global";
+      room.tagTo = "global";
+      await this.roomRepository.save(room);
+    }
+    return room;
+  }
 
    async saveMessage(message) {
 
@@ -61,11 +75,11 @@ export class ChatService {
     const roomMessages = await this.messageRepository.find({where: {roomTag: id}});
     if (!roomMessages[0])
       return false;
-    if (roomMessages.length > 20)
-    {
-      const sortMessages =  roomMessages.slice(roomMessages.length - 20);
-      return sortMessages;
-    } 
+    // if (roomMessages.length > 20)
+    // {
+    //   const sortMessages =  roomMessages.slice(roomMessages.length - 20);
+    //   return sortMessages;
+    // } 
     return roomMessages;
   }
   }
