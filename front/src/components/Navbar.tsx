@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom';
 import { io, Socket } from 'socket.io-client';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { SocketContext } from '../context/Socket';
 
 const Navbar = () => {
     
-    const [socket, setSocket] = useState<Socket>()
     const user = useAppSelector((state) => state.reducer.user);
     let navigation = useNavigate();
     const dispatch = useAppDispatch();
     const alertUser = "User left";
+    const socket = useContext(SocketContext);
 
-    useEffect(() => {
-        const newSocket = io('http://localhost:8000');
-        setSocket(newSocket)
-    }, [setSocket])
+    
 
 
     const  handleLogout = async (e: any) => {

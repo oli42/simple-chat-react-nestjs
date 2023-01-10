@@ -1,7 +1,7 @@
 FROM node:16.16.0
 
 WORKDIR /api
-COPY package.json .
+COPY package*.json ./
 RUN npm install
 EXPOSE 4000
 EXPOSE 8000

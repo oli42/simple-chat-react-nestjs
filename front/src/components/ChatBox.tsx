@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import MessageInput from "./MessageInput";
 import { useAppSelector } from "../app/hooks";
 import { io, Socket } from "socket.io-client";
 import con from '../img/con.png';
+import { SocketContext } from '../context/Socket';
 
 
 const ChatBox = () => {
 
   const user = useAppSelector((state) => state.reducer.user);
-  const [socket, setSocket] = useState<Socket>();
   const [messages, setMessages] = useState<any[]>([]);
   const [value, setValue] = useState<string>("");
   
@@ -20,12 +20,8 @@ const ChatBox = () => {
       // room: String(RoomActive.tag)
   }
 
-  useEffect(() => {
-      const newSocket = io('http://localhost:8000');
-      console.log('New socket', newSocket?.id);
-      setSocket(newSocket)
-  }, [setSocket])
-  
+  const socket = useContext(SocketContext);
+
 
   useEffect(() => {
       let url : string = `http://localhost:4000/chat/getRoomMessages/${String(user.roomId)}`;

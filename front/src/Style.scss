@@ -103,8 +103,8 @@ $gif: url(https://i.pinimg.com/originals/3d/08/e0/3d08e03cb40252526fee2036a67f07
       border-left: 1px solid white;
       // background-color: #3e3c61;
       // background-color: #01121a;
-      // background-color: #1a0000;
-      background-image: $gif;
+      background-color: #854203;
+      // background-image: $gif;
 
       position: relative;
     // overflow-y: auto;
@@ -116,6 +116,8 @@ $gif: url(https://i.pinimg.com/originals/3d/08/e0/3d08e03cb40252526fee2036a67f07
         // background-color: #2f2d52;
         // background-color: #52412d;
         background-color: #e39a08;
+        border-bottom: 1px solid #1a0000;
+
 
         height: 50px;
         padding: 10px;
@@ -197,7 +199,7 @@ $gif: url(https://i.pinimg.com/originals/3d/08/e0/3d08e03cb40252526fee2036a67f07
       //       }
       //     }
       //   }
-        
+      
       // }
       // .usereBox {
       .userChat {
@@ -207,18 +209,22 @@ $gif: url(https://i.pinimg.com/originals/3d/08/e0/3d08e03cb40252526fee2036a67f07
         gap: 25px;
         color: white;
         cursor: pointer;
-
+        border-bottom: 1px solid #1a0000;
+        
+        
         &:hover {
           background-color: #e39a08;
 
         }
-
+        
         img {
           width: 45px;
           height: 45px;
           border-radius: 50%;
           object-fit: cover;
-          padding-left: 10px
+          padding-left: 10px;
+          border-bottom: none;
+
         }
 
         span {
@@ -231,7 +237,7 @@ $gif: url(https://i.pinimg.com/originals/3d/08/e0/3d08e03cb40252526fee2036a67f07
           display: inline-block;
           vertical-align: middle
         }
-          
+        
       }
     }
 

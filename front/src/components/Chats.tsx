@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState, useEffect } from 'react';
 import { io, Socket } from 'socket.io-client';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { setUserList } from '../feature/userListSlice';
 import { addUser, fixRoom } from '../feature/userSlice';
 import ChatBox from './ChatBox';
+import { SocketContext } from '../context/Socket';
+
 
 const Chats = () => {
     
@@ -13,13 +15,10 @@ const Chats = () => {
     const userList = useAppSelector((state) => state.reducer.setUserList);
     const user = useAppSelector((state) => state.reducer.user);
     const dispatch = useAppDispatch();
-    const [socket, setSocket] = useState<Socket>()
-    
-    useEffect(() => {
-        const newSocket = io('http://localhost:8000');
-        setSocket(newSocket)
-    }, [setSocket])
+    const socket = useContext(SocketContext);
+    const [messages, setMessages] = useState<any[]>([]);
 
+    
     const alertListener = (alertUser: string) => {
         setAlertUser(alertUser);
     }
@@ -56,6 +55,7 @@ const Chats = () => {
             })
             const result: any  = await res.json();
             dispatch({type:fixRoom, payload: {tagFrom: result.tagFrom, roomId: result.id}});
+            
         
     }
     return (
@@ -75,9 +75,9 @@ const Chats = () => {
          {userList.map((User: any) => (
              User.online && User.username !== user.username ?
          <div className='userChat'>
-             <div className="userChat" key={User.id} onClick={()=> {HandleRoom(User)}}>
+             <div  key={User.username} onClick={()=> {HandleRoom(User)}}>
                  <img src={User.avatar}/>
-                 <span>{User.username}</span> 
+                 <span>{User.username}</span>
              </div> 
          </div> : null
          ))}

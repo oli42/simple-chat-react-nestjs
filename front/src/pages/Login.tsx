@@ -32,6 +32,7 @@ const Login = () => {
       })
   })
   const result = await response.json();
+  console.log('result', result)
   dispatch({type: addUser,payload: result});
 
   console.log('reponse login' , result);
