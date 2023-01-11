@@ -8,7 +8,6 @@ const ChatBox = () => {
 
   const user = useAppSelector((state) => state.reducer.user);
   const [messages, setMessages] = useState<any[]>([]);
-  const [value, setValue] = useState<string>("");
   const [notif, setNotif] = useState<string>("");
   
 
@@ -69,7 +68,7 @@ const ChatBox = () => {
           {
               messages.length > 0 ?
               messages.slice(-20).map((message: any, index: number) => (  
-                  message.roomTag == user.roomId ?
+                  message.roomTag == user.roomId &&  message.roomTag != 0 ?
                   <div className={`message ${message.fromUsername === user.username && "owner"}`}>
                       <div key={message.index} className='messageInfo'>
                           <span >{message.fromUsername} |{message.time}</span>

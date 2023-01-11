@@ -44,7 +44,6 @@ const Chats = () => {
         let url_ = "http://localhost:4000/chat/checkOrCreateRoom";
         const res: any = await fetch(url_, {method: "POST",
         headers: {
-        // 'Authorization': `Bearer ${values[0]}`,
         'Content-Type': 'application/json',
         'cors': 'true'
         },
@@ -63,11 +62,9 @@ const Chats = () => {
          <div>
          {userList.map((User: any) => (
              User.online && User.username !== user.username ?
-        //  <div className='userChat'>
              <div className='userChat' key={User.username} onClick={()=> {HandleRoom(User)}}>
                  <img src={User.avatar}/>
                  <span>{User.username}</span>
-             {/* </div>  */}
          </div> : null
          ))}
      </div>

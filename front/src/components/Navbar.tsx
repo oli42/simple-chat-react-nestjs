@@ -39,7 +39,6 @@ const Navbar = () => {
             <div className='user'>
             <p >{user.username}</p>
                 <img src={user.avatar}></img>
-                {/* <span></span>  */}
                 <button onClick={(e) => handleLogout(e)}>logout</button>
             </div>
         </div> 

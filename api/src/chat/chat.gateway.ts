@@ -17,26 +17,26 @@ import { ChatService } from './chat.service';
     server: Server;
 
     afterInit(server: Server) {
-      console.log('initialized');
+      // console.log('initialized');
     }
     
     handleConnection(client: Socket, ...args: any[]) {
-      console.log(`Client connected: ${client.id}`);
+      // console.log(`Client connected: ${client.id}`);
     }
     
     handleDisconnect(client: Socket) {
-      console.log(`Client disconnected: ${client.id}`);
+      // console.log(`Client disconnected: ${client.id}`);
     }
 
     @SubscribeMessage('newUserClient')
     handleNewMessage(@ConnectedSocket() client: Socket, @MessageBody()  alert: any): void {
-      console.log('Received message in Back', alert);
+      // console.log('Received message in Back', alert);
       this.server.emit('newUserServer', alert);
     }
 
     @SubscribeMessage('messageFromClient')
     handleMessage(@ConnectedSocket() client: Socket, @MessageBody()  message: any): void {
-      console.log('Received message in Back', message);
+      // console.log('Received message in Back', message);
       this.server.emit('messageFromServer', message);
       this.chatService.saveMessage(message);
 
@@ -44,13 +44,7 @@ import { ChatService } from './chat.service';
 
     @SubscribeMessage('alertClient')
     handleAlert(@ConnectedSocket() client: Socket, @MessageBody()  alert: any): void {
-      console.log('Received alert in Back', alert);
+      // console.log('Received alert in Back', alert);
       this.server.emit('alertServer', alert);
     }
-
-    // @SubscribeMessage('refreshClient')
-    // handleRefresh(@ConnectedSocket() client: Socket, @MessageBody()  message: any): void {
-    //   this.server.emit('refreshServer', "refresh");
-
-    // }
 }
