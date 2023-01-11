@@ -1,4 +1,4 @@
-# chat-react-nestjs!
+# chat react/nestjs
 
 A simple chat built with react and nestjs.
 
