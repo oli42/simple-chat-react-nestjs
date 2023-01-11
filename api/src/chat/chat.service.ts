@@ -20,6 +20,24 @@ export class ChatService {
     
    async checkOrCreateRoom(body){
 
+    if (body.to[1] == 'forum'){
+
+      const roomGlobal = await this.roomRepository.findOne({where: {from: body.to[1]}});
+      if (roomGlobal){
+        roomGlobal.active = true;
+        await this.roomRepository.save(roomGlobal);
+  
+        return (roomGlobal);
+      }
+      const newRoom = await this.roomRepository.create();
+      newRoom.from = 'forum';
+      newRoom.to = 'forum';
+      newRoom.tagFrom = 'forum';
+      newRoom.tagTo = 'forum';
+      newRoom.active = true;
+      await this.roomRepository.save(newRoom);
+      return newRoom;
+    }
     const roomFrom = await this.roomRepository.findOne({where: {to: body.to[1], from: body.from}});
     if (roomFrom){
       roomFrom.active = true;

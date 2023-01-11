@@ -22,13 +22,13 @@ const Login = () => {
       e.preventDefault();
       let url = "http://localhost:4000/users/login";
       const response = await fetch(url, {method: "POST",
-    headers: {
-      'Content-Type': 'application/json',
-      'cors': 'true'
-    },
-      body: JSON.stringify({
-        email: e.target[0].value,
-        password: e.target[1].value,
+      headers: {
+        'Content-Type': 'application/json',
+        'cors': 'true'
+      },
+        body: JSON.stringify({
+          email: e.target[0].value,
+          password: e.target[1].value,
       })
   })
   const result = await response.json();
@@ -39,6 +39,7 @@ const Login = () => {
   if (err){
     setErr(true);
   }
+
   socket?.emit("newUserClient", alertUser);
   navigate("/Home");
 }

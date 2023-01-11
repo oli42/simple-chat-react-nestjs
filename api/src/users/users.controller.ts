@@ -17,6 +17,12 @@ export class UsersController {
     @Inject(UsersService)
 	private readonly service: UsersService;
 
+    @Post('/createGlobalUser')
+    async createGlobalUser(@Body() body: any): Promise<any>{
+		return await this.service.createGlobalUser(body);
+		
+	}
+    
     @Post('/createUser')
     async createUser(@Body() body: any): Promise<any>{
 		return await this.service.createUser(body);

@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Add from "../img/addAvatar.png";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { addUser } from "../feature/userSlice";
+import { addUser} from "../feature/userSlice";
 import { setUserList } from "../feature/userListSlice";
+import { SocketContext } from '../context/Socket';
 
 
 
@@ -13,11 +14,36 @@ const Register = () => {
   const [error, setError] = useState(false);
   const navigate = useNavigate();
   const [selectedFile, setSelectedFile] = useState<File>(Add);
-
   const user = useAppSelector((state) => state.reducer.user);
   const dispatch = useAppDispatch();
+  const socket = useContext(SocketContext);
+  const alertUser = "New user";
+
 
   const handleSelect = async (e: any) => setSelectedFile(e.target.files[0])
+
+
+  async function handleGlobal() {
+
+    let url_ = "http://localhost:4000/users/createGlobalUser";
+    const response_ = await fetch(url_, {method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'cors': 'true'
+      },
+        body: JSON.stringify({
+          username: 'forum',
+          email: 'forum@email.com',
+          password: 'forum',
+      })
+    })
+    const result_ = await response_.json();
+
+  }
+
+  useEffect(() => {
+    handleGlobal();
+  }, [])
     
   async function handleSubmit(e: any) {
         e.preventDefault();
@@ -35,18 +61,16 @@ const Register = () => {
       }
       )
       const result = await response.json();
+
       if (!result){
         setError(true);
         navigate("/");
         return ;
       }
-    console.log('reponse createUser' , result);
+
+  
     dispatch({type: addUser,payload: result});
     
-    
-    
-    
-    console.log('selectedFile', selectedFile);
     
     const formData = new FormData();
     formData.append("file", selectedFile, selectedFile.name);
@@ -58,7 +82,9 @@ const Register = () => {
 				body: formData,
 			}
       ).then(res => res.json())
-      console.log('res', res);
+
+      socket?.emit("newUserClient", alertUser);
+
       navigate("/Home");
       dispatch({type: addUser,payload: res});
 

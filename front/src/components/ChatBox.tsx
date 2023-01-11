@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import MessageInput from "./MessageInput";
 import { useAppSelector } from "../app/hooks";
-import { io, Socket } from "socket.io-client";
-import con from '../img/con.png';
 import { SocketContext } from '../context/Socket';
 
 
@@ -11,13 +9,11 @@ const ChatBox = () => {
   const user = useAppSelector((state) => state.reducer.user);
   const [messages, setMessages] = useState<any[]>([]);
   const [value, setValue] = useState<string>("");
+  const [notif, setNotif] = useState<string>("");
   
 
-  // const alert = "NEW MESSAGE AVAILABLE";
   const  alertNotif = {
       text: "New message",
-      // from: String(User.nickname),
-      // room: String(RoomActive.tag)
   }
 
   const socket = useContext(SocketContext);
@@ -28,14 +24,18 @@ const ChatBox = () => {
       const ret = fetch(url)
       .then(response => response.json())
       .then(data => setMessages(data))
-  }, [messages.length])
+  }, [messages.length, notif])
 
   const send = (messageData: any) => {
       socket?.emit("messageFromClient", { messageData });
   }
 
+  const alertListener = (alert: any) => {
+    console.log(alert);
+    setNotif(alert);
+
+  }
   const messageListener = (message: any) => {
-      console.log(message);
       let MessagesList : any[] = [];
       if (messages.length > 0)
           MessagesList = [...messages];
@@ -50,6 +50,13 @@ const ChatBox = () => {
           socket?.off("messageFromServer", messageListener)
       }
   }, [messageListener])
+
+  useEffect(() => {
+    socket?.on("alertServer" , alertListener)
+    return () => {
+        socket?.off("alertServer", messageListener)
+    }
+}, [alertListener])
 
 
   return (

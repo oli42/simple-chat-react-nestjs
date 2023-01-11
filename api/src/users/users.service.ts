@@ -15,6 +15,22 @@ export class UsersService {
        
 	) {}
 
+	async createGlobalUser(body): Promise<any> {
+		const exist = await this.userRepository.findOne({where: {username: body.username}});
+		if (exist)
+			return exist;
+		const user = await this.userRepository.create();
+        user.username = body.username;
+        user.email = body.email;
+		const salt = await bcrypt.genSalt();
+      	user.password = await bcrypt.hash(body.password, salt);
+		user.online = true;
+		user.room = 'forum'
+		user.avatar = 'http://localhost:4000/users/upload/forum.png'
+		await this.userRepository.save(user);
+		return user;
+	}
+
 	async createUser(body): Promise<any> {
 		const exist = await this.userRepository.findOne({where: {email: body.email}});
 		if (exist)

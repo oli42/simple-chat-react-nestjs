@@ -42,6 +42,12 @@ import { ChatService } from './chat.service';
 
     }
 
+    @SubscribeMessage('alertClient')
+    handleAlert(@ConnectedSocket() client: Socket, @MessageBody()  alert: any): void {
+      console.log('Received alert in Back', alert);
+      this.server.emit('alertServer', alert);
+    }
+
     // @SubscribeMessage('refreshClient')
     // handleRefresh(@ConnectedSocket() client: Socket, @MessageBody()  message: any): void {
     //   this.server.emit('refreshServer', "refresh");
